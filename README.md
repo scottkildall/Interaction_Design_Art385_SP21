@@ -1,6 +1,6 @@
 ## Art385_Spring2021
 #### by Scott Kildall
-January 9th, 2021
+January, 2021
 
 
 ### Overview
