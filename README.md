@@ -11,14 +11,15 @@ In the root folder are various P5 sketches we use in the class. Some are covered
 In the Assets folder are some specific files related to non-coding tutorials, such as JPEG to PNG.
 
 ### Sketches
-** (1) P5jsEmptyExample **
+**(1) P5jsEmptyExample**
+
 An empty example, which I copy for new repsoitories
 
-**(2) HelloWorldP5 **
+**(2) HelloWorldP5**
 
 Simple "Hello, World" example, refered to in the video tutorial
 
-**(3) Simple Shapes **
+**(3) Simple Shapes**
 
 Referred to in the video tutorial for Simple Shapes.
 
