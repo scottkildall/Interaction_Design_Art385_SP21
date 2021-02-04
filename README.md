@@ -27,6 +27,10 @@ Referred to in the video tutorial for Simple Shapes.
 
 Rotating ellipse example
 
+**(5) DebugModeP5**
+
+Shows a way to turn debug info on/off
+
 
 ### Assets
 These will be used in some of the video tutorials
