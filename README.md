@@ -31,6 +31,20 @@ Rotating ellipse example
 
 Shows a way to turn debug info on/off
 
+**(6) SimpleImageDisplay**
+Draws an image, centered with background transparent.
+
+To display this, you will need to launch a localhose.
+
+Go to Terinal window and:
+
+`cd [path]
+
+python -m SimpleHTTPServer
+`
+
+On Mac, you can type 'cd ' and drag your parent directory onto the Terminal window change to that directoy.
+
 
 ### Assets
 These will be used in some of the video tutorials
