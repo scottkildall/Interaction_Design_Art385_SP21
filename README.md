@@ -31,7 +31,12 @@ Rotating ellipse example
 
 Shows a way to turn debug info on/off
 
-**(6) SimpleImageDisplay**
+**(6) ForLoop**
+
+Nested for loop
+
+
+**(7) SimpleImageDisplay**
 Draws an image, centered with background transparent.
 
 To display this, you will need to launch a localhose.

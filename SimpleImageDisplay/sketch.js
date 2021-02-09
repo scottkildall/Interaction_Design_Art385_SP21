@@ -33,7 +33,7 @@ function setup() {
 // draw image in the center of the screen
 function draw() {
 	// draw the background
-	background(128);
+	background(255,0,0);
 		
   	// Displays the image at center point - add param 3 and 4 fo width and height
   	image(img, width/2, height/2);
