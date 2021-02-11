@@ -35,32 +35,36 @@ function setup() {
 function draw() {
   background(128);
 
-  let xDist = width/(numColumns+1);		// distance between each picture
+  doForLoop();
+}
+
+function doForLoop() {
+  let xDist = width/(numColumns+1);   // distance between each picture
   let yDist = height/(numRows+1);
 
   // draw columns first 
-  for( let i = 0; i < numColumns; i++ ) {	
-  	// draw the rows
-  	for( let j = 0; j < numRows; j++ ) {
-	  	drawPicture( xDist * (i+1), yDist * (j+1));
+  for( let i = 0; i < numColumns; i++ ) { 
+    // draw the rows
+    for( let j = 0; j < numRows; j++ ) {
+      drawPicture( xDist * (i+1), yDist * (j+1));
 
-	  	// White text for i
-	  	fill(255);
-	  	text(i, xDist * (i+1), yDist * (j+1) +  pictureHeight/2 + textOffset );
-  	
-	  	// Green text for j
-	  	fill(0,255,0);
-	  	text(j, xDist * (i+1), yDist * (j+1) +  pictureHeight/2 + textOffset * 2);
-  	}
+      // White text for i
+      fill(255);
+      text(i, xDist * (i+1), yDist * (j+1) +  pictureHeight/2 + textOffset );
+    
+      // Green text for j
+      fill(0,255,0);
+      text(j, xDist * (i+1), yDist * (j+1) +  pictureHeight/2 + textOffset * 2);
+    }
   }
+}
+
+// not an actual image
+function drawPicture(x,y) {
+   fill(255,0,0);
+   rect(x,y,pictureWidth,pictureHeight);
 }
 
 function windowResized() {
    resizeCanvas(windowWidth, windowHeight);
-}
-
-
-function drawPicture(x,y) {
-   fill(255,0,0);
-   rect(x,y,pictureWidth,pictureHeight);
 }

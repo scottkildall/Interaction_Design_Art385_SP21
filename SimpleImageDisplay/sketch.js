@@ -1,5 +1,5 @@
-/*
-	Simple image display example
+/***********************************************************************************
+  Simple image display example
 	by Scott Kildall
 
 	Displays an image, centered.
@@ -7,8 +7,7 @@
 	* Use to show how to launch a localhost from terminal/command prompt
 	* Shows preload() command
 	* Shows use of subdirectories
-	
-*/
+***********************************************************************************/
 
 // Global variable that we will use in all the functions
 var img; 
@@ -38,3 +37,4 @@ function draw() {
   	// Displays the image at center point - add param 3 and 4 fo width and height
   	image(img, width/2, height/2);
 }
+

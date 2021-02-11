@@ -1,6 +1,10 @@
-//-- SimpleShapes by Scott Kildall
-//-- Sample P5.js Sketch for drawing things!
+/***********************************************************************************
+  SimpleShapes
+  by Scott Kildall
 
+  Sketch for drawing some very simple shapes
+
+***********************************************************************************/
 
 // Global Variables
 var ellipseXPos = 0;
@@ -9,7 +13,7 @@ var ellipseDist = 40;
 
 // Setup code goes here
 function setup() {
-  createCanvas(windowWidth, windowHeigth);
+  createCanvas(windowWidth, windowHeight);
   print("Starting up Simple Shapes");
   rectMode(CENTER);
   ellipseMode(CENTER);
@@ -23,17 +27,16 @@ function setup() {
 
 // Draw code goes here
 function draw() {
-  let i = 5;
-  // do stuff with i
-
   background(34,50,204);
 
-  // Circle
-  fill(0,102,255);
-  circle(width/2,height/2,20);
-  
+  drawCircle();
   drawEllipses();
   drawRects();
+}
+
+function drawCircle() {
+  fill(0,102,255);
+  circle(width/2,height/2,20);
 }
 
 function drawEllipses() {
@@ -41,7 +44,7 @@ function drawEllipses() {
   fill(0,255,0);
   ellipse(ellipseXPos,ellipseYPos,200,80);
 
-  // Ellipse
+  // Ellipse #2
   fill(0,255,0);
   ellipse(ellipseXPos,ellipseYPos+ellipseDist,200,80);
 }
