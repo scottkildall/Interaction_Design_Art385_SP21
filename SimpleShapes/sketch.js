@@ -9,7 +9,7 @@ var ellipseDist = 40;
 
 // Setup code goes here
 function setup() {
-  createCanvas(1000, 800);
+  createCanvas(windowWidth, windowHeigth);
   print("Starting up Simple Shapes");
   rectMode(CENTER);
   ellipseMode(CENTER);

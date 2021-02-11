@@ -1,4 +1,3 @@
-
 /******************************************************
 
 	ForLoop by Scott Kildall
@@ -24,7 +23,7 @@ var textOffset = 20;
 
 // Setup code goes here
 function setup() {
-  createCanvas(1000, 800);
+  createCanvas(windowWidth, windowHeight);
   rectMode(CENTER);
 
   textAlign(CENTER);
