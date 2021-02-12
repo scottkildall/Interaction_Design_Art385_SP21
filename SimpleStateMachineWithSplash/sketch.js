@@ -21,7 +21,7 @@
 
 ------------------------------------------------------------------------------------
 	Notes:
-	- a more advanced state machine with use array-indexing for each of
+	- a more advanced state machine with use array-indexing variables for each of
 		images the draw functions, but this is just for illustrative purposes
 
 	- even more advanced will be to put the draw functions into an array, would
@@ -35,7 +35,6 @@
 
 // Array of images
 var images = [];
-var splashImage;
 
 // variable that is a function 
 var drawFunction;
@@ -50,8 +49,7 @@ function preload() {
   images[2] = loadImage('assets/three.png');
   images[3] = loadImage('assets/four.png');
   images[4] = loadImage('assets/five.png');
-
-  splashImage = loadImage('assets/splash.png');
+  images[5] = loadImage('assets/splash.png');
 }
 
 // Center drawing, drawFunction will be one for default
@@ -117,9 +115,9 @@ drawFive = function() {
    text("State Five", width/2, height - gTextOffset);
 }
 
-//-- drawOne() will draw the image at index 4 from the array
+//-- drawSplash() will draw the image at index 4 from the array
 drawSplash = function() {
-   image(splashImage,width/2, height/2);
+   image(images[5],width/2, height/2);
 }
 
 
