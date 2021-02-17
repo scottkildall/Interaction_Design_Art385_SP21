@@ -1,7 +1,7 @@
 /***********************************************************************************
-  Simple Counter
+  Simple Timer
 
-  Uses the p5.timer.js class to show elapsed seconds on the screen
+  Uses the p5.timer.js class to show a 10-second countdown
 
 ------------------------------------------------------------------------------------
 	To use:
@@ -10,15 +10,17 @@
   <script src="p5.timer.js"></script>
 ***********************************************************************************/
 
-// uninitialized object
+
 var simpleTimer;
-var elapsedSeconds = 0;
+var waitForClick = true;
+var yTextPos = 60;
 
 // Setup code goes here
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
-  simpleTimer = new Timer(1000);
+  // Allocate the timer itself, specify time in milliseconds
+  simpleTimer = new Timer(10000);
   simpleTimer.start();
 
   textAlign(CENTER);
@@ -28,19 +30,34 @@ function setup() {
 
 // Draw code goes here
 function draw() {
-  background(128);
+  background(0);
 
-  updateTimer();
+  frameRate(60);
 
-  fill(255);
-  text(elapsedSeconds, width/2, 50);
+  if( waitForClick ) {
+      fill(255);
+      text( "Click on mouse to begin timer", width/2, yTextPos); 
+  }  
+  else {
+    updateTimer();
+  }
 }
 
 // Looks for elapsed time
 function updateTimer() {
   if( simpleTimer.expired() ) {
-  	elapsedSeconds++;
-  	simpleTimer.start();
+  	fill(255,0,0);
+    frameRate(1);
+    text( "BOOM", width/2, yTextPos );
+    waitForClick = true;
   }
-
+  else {
+    fill(255);
+    text( Math.round(simpleTimer.getRemainingTime()/1000), width/2, yTextPos )
+  }
 }
+
+function mousePressed() {
+  waitForClick = false;
+}
+

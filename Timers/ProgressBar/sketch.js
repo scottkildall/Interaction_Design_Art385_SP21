@@ -50,7 +50,7 @@ function draw() {
     if( simpleTimer.expired() ) {
       fill(255);
       text("Done", hMargin, 60 );
-      //drawTimerText();
+      drawTimerText();
     }
     else {
       drawTimerText();
