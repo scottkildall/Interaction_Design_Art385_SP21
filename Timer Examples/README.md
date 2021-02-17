@@ -4,7 +4,7 @@ www.kildall.com
 
 
 ## Overview
-This is a class for p5.js that will serve as a timer. It encapsulates the millis() function and various variables you might use to 
+This is a class for p5.js that will serve as a timer. It encapsulates the millis() function and various variables you might use to do any asynchronous timing operations.
 
 
 ## Adding it your index.html
