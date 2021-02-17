@@ -33,23 +33,23 @@ class Timer {
   }
   
   getRemainingTime() {
-    if( expired() )
+    if( this.expired() )
       return 0;
       
-    return  (startTime + duration) - millis();
+    return  (this.startTime + this.duration) - millis();
   }
   
   getPercentageRemaining() {
-    if( expired() )
+    if( this.expired() )
      return 1.0;
       
-    return getRemainingTime()/duration;
+    return this.getRemainingTime()/this.duration;
   }
   
    getPercentageElapsed() {
-    if( expired() )
+    if( this.expired() )
      return 0.0;
       
-    return 1 - (getRemainingTime()/duration);
+    return 1.0 - (this.getRemainingTime()/this.duration);
   }	 	
 }
