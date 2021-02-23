@@ -16,3 +16,5 @@ These are some samples for the p5.clickable library (https://github.com/Lartu/p5
 
 (1) SimplePNGButton: Displays a single PNG button with a cat image, alert to show it was clicked. Uses the onHover and onOutside functions to tint the image
 
+(2) TextButtons: array of text buttons with labels.
+
