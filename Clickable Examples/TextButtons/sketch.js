@@ -27,16 +27,17 @@ function setup() {
   drawFunction = drawKitchen;
 }
 
-// Very simple, sets the background color and calls your state machine function
-function draw() {
-  // will call your state machine function
-  drawFunction();
-}
 
 // Call the draw function for each room and draw nav buttons on top of them
 function draw() {
   drawFunction();
   drawButtons();
+
+  // random will give 0-99.99999
+  if( random(100) < .5 ) {
+  	print("random event!");
+  	drawFunction = drawBathroom;
+  }
 }
 
 // just go through array and draw
