@@ -37,8 +37,8 @@ function makeCatButton() {
   catButton = new Clickable();
   
   // set the image to be this PNG
-  catButton.image = catImage;
-  catButton.text = "";
+  catButton.setImage(catImage);
+  catButton.id = 400;
 
   // This should set the color to be off OR background transparent
   //catButton.color = "#00000000";

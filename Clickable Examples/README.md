@@ -6,10 +6,17 @@ www.kildall.com
 ## Overview
 These are some samples for the p5.clickable library (https://github.com/Lartu/p5.clickable)
 
+## To improve things
+I have forked the p5.clickable library
+https://github.com/scottkildall/p5.clickable
+
+
 ## Things I have noticed
 (1) For the Clickable class, it will always draw and do mouseX and mouseY calculations from the upper-left corner, so you need to make sure that you are in imageMode(CORNER) and rectMode(CORNER), otherwise it won't interact correctly
 
 (2) If you want background transparent PNGs, set the .color field of the clickable object to be "#00000000"
+
+
 
 
 ## Examples

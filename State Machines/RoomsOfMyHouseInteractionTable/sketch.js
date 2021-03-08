@@ -138,7 +138,7 @@ function preload() {
   officeAssets[3] = loadImage('assets/officeLight.png');
 
   // load the table as a table object, fo all other setup functions later
-  interactionTable = loadTable('assets/interactionTable.csv', 'csv', 'header');
+  interactionTable = loadTable('data/interactionTable.csv', 'csv', 'header');
 }
 
 // Center drawing, drawFunction will be one for default
