@@ -1,0 +1,13 @@
+CurrentState,KeyTyped,NextState
+drawLivingRoom,k,drawKitchen
+drawLivingRoom,d,drawDiningRoom
+drawKitchen,d,drawDiningRoom
+drawKitchen,l,drawLivingRoom
+drawDiningRoom,k,drawKitchen
+drawDiningRoom,r,drawBedroom
+drawDiningRoom,o,drawOffice
+drawDiningRoom,l,drawLivingRoom
+drawBedroom,b,drawBathroom
+drawBedroom,d,drawDiningRoom
+drawBathroom,r,drawBedroom
+drawOffice,k,drawKitchen
