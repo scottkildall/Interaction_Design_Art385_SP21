@@ -1,0 +1,7 @@
+ID,Name,State,PNGFilename,Text,x,y,visible
+0,Cat,Start,assets/cat.png,,110,200,yes
+1,Heart,Main,assets/hearts1.png,,220,200,yes
+2,Lightning,Main,assets/lightning1.png,,330,200,yes
+3,Spiral,Main,assets/spiral3.png,,440,200,yes
+4,Inflate,Main,,Inflate,300,400,yes
+5,Deflate,Main,,Deflate,500,400,yes
