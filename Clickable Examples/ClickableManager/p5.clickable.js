@@ -58,6 +58,7 @@ function getTextBounds(m, font, size) {
 function Clickable() {
 	this.id = 0;		// unique id number
 	this.name = "";		// string name for the clickable 
+	this.resizeImageFlag = false;	// flag for setting width and height to image after setImage since it is asynchronous
 	this.x = 0;			//X position of the clickable
 	this.y = 0;			//Y position of the clickable
 	this.width = 100;		//Width of the clickable
@@ -122,7 +123,19 @@ function Clickable() {
 		this.updateTextSize();
 	}
 
+	// Added at async
 	this.drawImage = function(){
+		// exit if image not yet loaded
+		if( this.image === null ) {
+			return;
+		}
+
+		// resize if flag has been triggered & image != 1
+		if( this.resizeImageFlag && this.image.width != 1 && this.image.height != 1) {
+			this.resize(this.image.width, this.image.height);
+			this.resizeImageFlag = false;
+		}
+
 		image(this.image, this.x, this.y, this.width, this.height);
 		if(this.tint && !this.noTint){
 			tint(this.tint)
@@ -134,9 +147,11 @@ function Clickable() {
 		}
 	}
 
+	// the image won't be resized yet to match the PNG, so we set a draw flag to do this
 	this.setImage = function (img) {
 		this.image = img;
 		this.text = "";
+		this.resizeImageFlag = true;
 	}
 
 	this.draw = function () {

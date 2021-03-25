@@ -22,7 +22,7 @@ var clickables;
 // indexes into the array (constants)
 const redIndex = 0;
 const greenIndex = 1;
-const blueIndex = 2;
+const yellowIndex = 2;
 const popIndex = 3;
 const inflateIndex = 4;
 const deflateIndex = 5;
@@ -97,7 +97,7 @@ function setupClickables() {
 
 clickableButtonPressed = function () {
 // NEW BALLOON
-  if( this.id === redIndex || this.id === greenIndex || this.id === blueIndex ) {
+  if( this.id === redIndex || this.id === greenIndex || this.id === yellowIndex ) {
     newBalloon(this.id);
   }
 
@@ -150,13 +150,13 @@ function newBalloon(idNum) {
   ellipseDiameter = startEllipseDiameter;
 
   if( idNum === redIndex) {
-    balloonColor = "#FF0000";
+    balloonColor = color('#FF0000');
   }
   else if( idNum === greenIndex) {
-    balloonColor = "#00FF00";
+    balloonColor = color('#00FF00');
   }
-  else if( idNum === blueIndex) {
-    balloonColor = "#0000FF";
+  else if( idNum === yellowIndex) {
+    balloonColor = color('#FFFF00');
   }
 }
 
