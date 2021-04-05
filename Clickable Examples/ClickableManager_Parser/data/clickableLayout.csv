@@ -1,0 +1,5 @@
+ID,Name,PNGFilename,Text,x,y,visible
+0,Ghost,assets/ghost.png,,width/2,height/2,yes
+1,Bird,assets/bird.png,,width/4*1.5,250,yes
+2,Previous,,Previous,100,50,yes
+3,Next,,Next,300,50,yes
