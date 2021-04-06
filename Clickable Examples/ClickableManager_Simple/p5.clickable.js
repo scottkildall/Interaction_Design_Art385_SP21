@@ -198,7 +198,7 @@ class ClickableManager {
 	getClickableArray() {
 		return this.clickableArray;
 	}
-	
+
 	// expects as .csv file with the format as outlined in the readme file
 	setup() {
 		// this could be cleaner...
@@ -220,7 +220,7 @@ class ClickableManager {
 			// IF YOU GET AN ERROR, you probably have the incorrect headers information on the CSV file
 			// especially check the case
 			this.clickableArray[i].id = parseInt(this.allocatorTable.getString(i, 'ID'));
-			this.clickableArray[i].name = parseInt(this.allocatorTable.getString(i, 'Name'));
+			this.clickableArray[i].name = this.allocatorTable.getString(i, 'Name');
 			this.clickableArray[i].x = eval(this.allocatorTable.getString(i, 'x'));
 			this.clickableArray[i].y = eval(this.allocatorTable.getString(i, 'y'));
 			if( hasWidth ) {
