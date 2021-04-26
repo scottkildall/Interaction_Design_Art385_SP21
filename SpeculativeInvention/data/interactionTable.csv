@@ -1,0 +1,3 @@
+CurrentState,KeyTyped,KeyCode,MouseEvent,ClickableName,MapDirection,NextState
+Splash,,,mouseReleased,,,Instructions
+Instructions,,,mouseReleased,,,Characters

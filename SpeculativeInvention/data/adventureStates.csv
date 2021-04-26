@@ -1,0 +1,5 @@
+ID,StateName,ClassName,PNGFilename,CollisionFilename
+0,Splash,PNGRoom,assets/splash.png,
+1,Instructions,PNGRoom,assets/instructions.png,
+2,Characters,PNGRoom,assets/characters.png,
+
