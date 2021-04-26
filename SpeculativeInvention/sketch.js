@@ -22,25 +22,32 @@ var playerAnimation;
 var clickablesManager;    // the manager class
 var clickables;           // an array of clickable objects
 
-// 
+
 // indexes into the clickable array (constants)
-const playGameIndex = 0;
-const chooseAvatarIndex = 1;
-const doneIndex = 2;
+const cl_startScenario = 0;
+const cl_Start_GoomazonPays = 1;
+const cl_Start_CityPays = 2;
+const cl_Start_RaiseTaxes = 3;
 
 // anger emojis
 var angerImage;   // anger emoji
 var maxAnger = 5;
 
+// character arrays
 var characterImages = [];   // array of character images, keep global for future expansion
 var characters = [];        // array of charactes
 
+// characters
 const goomazon = 0;
 const mayor = 1;
 const bigLabor = 2;
 const nimby = 3;
 const treeHugger = 4;
 const consumer = 5;
+
+// room indices - look at adventureManager
+const startScreen = 3;
+
 
 // Allocate Adventure Manager with states table and interaction tables
 function preload() {
@@ -64,8 +71,11 @@ function setup() {
   // based on the state name in the clickableLayout
   adventureManager.setClickableManager(clickablesManager);
 
-    // This will load the images, go through state and interation tables, etc
+  // This will load the images, go through state and interation tables, etc
   adventureManager.setup();
+
+  // load all text screens
+  loadAllText();
 
   // call OUR function to setup additional information about the p5.clickables
   // that are not in the array 
@@ -125,9 +135,14 @@ function setupClickables() {
   // All clickables to have same effects
   for( let i = 0; i < clickables.length; i++ ) {
     clickables[i].onHover = clickableButtonHover;
-    clickables[i].onOutside = clickableButtonOnOutside;
-    clickables[i].onPress = clickableButtonPressed;
+    clickables[i].onOutside = clickableButtonOnOutside;    
   }
+
+  // we do specific callbacks for each clickable
+  clickables[cl_startScenario].onPress = clickableButtonPressed;
+  clickables[cl_Start_GoomazonPays].onPress = clGoomazonPays;
+  clickables[cl_Start_CityPays].onPress = clCityPays;
+  clickables[cl_Start_RaiseTaxes].onPress = clRaiseTaxes;
 }
 
 // tint when mouse is over
@@ -144,11 +159,33 @@ clickableButtonOnOutside = function () {
 }
 
 clickableButtonPressed = function() {
-  // these clickables are ones that change your state
-  // so they route to the adventure manager to do this
   adventureManager.clickablePressed(this.name);
-  
+} 
+
+
+clGoomazonPays = function() {
+    characters[goomazon].addAnger(2);
+    characters[nimby].subAnger(1);
+    characters[bigLabor].addAnger(1);
+    adventureManager.clickablePressed(this.name);
 }
+
+clCityPays = function() {
+  characters[mayor].addAnger(1);
+  characters[nimby].subAnger(1);
+  characters[goomazon].subAnger(2);
+  adventureManager.clickablePressed(this.name);
+}
+
+clRaiseTaxes = function() {
+  characters[nimby].addAnger(1);
+  characters[consumer].addAnger(1);
+  characters[treeHugger].addAnger(1);
+  characters[goomazon].subAnger(1);
+  adventureManager.clickablePressed(this.name);
+}
+
+
 
 //-------------- CHARACTERS -------------//
 function allocateCharacters() {
@@ -224,39 +261,71 @@ class Character {
   }
 }
 
+//-------------- ROOMS --------------//
+
+// hard-coded text for all the rooms
+// the elegant way would be to load from an array
+function loadAllText() {
+  // go through all states and setup text
+  // ONLY call if these are ScenarioRoom
+  
+// copy the array reference from adventure manager so that code is cleajer
+  scenarioRooms = adventureManager.states;
+
+  scenarioRooms[startScreen].setText("Who Pays for it?", "The underground tunnels cost money to maintain. Goomazon threatens to leave the city if they have to pay for all the maintenance work. What should we do?");
+}
+
 //-------------- SUBCLASSES / YOUR DRAW CODE CAN GO HERE ---------------//
 
 // Instructions screen has a backgrounnd image, loaded from the adventureStates table
 // It is sublcassed from PNGRoom, which means all the loading, unloading and drawing of that
 // class can be used. We call super() to call the super class's function as needed
-class StandardScreen extends PNGRoom {
+class ScenarioRoom extends PNGRoom {
   // Constructor gets calle with the new keyword, when upon constructor for the adventure manager in preload()
   constructor() {
     super();    // call super-class constructor to initialize variables in PNGRoom
 
-    this.textBoxWidth = (width/6)*4;
-    this.textBoxHeight = (height/6)*4; 
+    this.titleText = "";
+    this.bodyText = "";
+  }
 
-    // hard-coded, but this could be loaded from a file if we wanted to be more elegant
-    this.instructionsText = "A new invention has been made!";
+  // should be called for each room, after adventureManager allocates
+  setText( titleText, bodyText ) {
+    this.titleText = titleText;
+    this.bodyText = bodyText;
+    this.drawY = 360;
+    this.drawX = 100;
   }
 
   // call the PNGRoom superclass's draw function to draw the background image
   // and draw our instructions on top of this
     draw() {
-      // tint down background image so text is more readable
-      tint(128);
-      
       // this calls PNGRoom.draw()
       super.draw();
       
-      // text draw settings
+
+      // title text
+      fill(255);
+      textAlign(CENTER);
+      textSize(36);
+
+      text("How do we feel?", width/2, 60);
+
+      // title text
       fill(255);
       textAlign(CENTER);
       textSize(30);
 
+      text(this.titleText, width/2, this.drawY);
+     
       // Draw text in a box
-      text(this.instructionsText, width/6, height/6, this.textBoxWidth, this.textBoxHeight );
+      //text(this.titleText, width/6, height/6, this.textBoxWidth, this.textBoxHeight );
+    
+      fill(255);
+      textAlign(LEFT);
+      textSize(24);
+
+      text(this.bodyText, this.drawX, this.drawY + 60, width - (this.drawX*2),height - (this.drawY+100) );
     }
 }
 
