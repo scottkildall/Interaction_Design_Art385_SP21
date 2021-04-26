@@ -1,5 +1,2 @@
 ID,Name,State,PNGFilename,Text,x,y,visible
 0,StartScenario,Characters,,Start Scenario,100,650,yes
-1,Start_GoomazonPays,Start,,Goomazon,100,600,yes
-2,Start_CityPays,Start,,City Government,400,600,yes
-3,Start_RaiseTaxes,Start,,Raise Taxes,700,600,yes

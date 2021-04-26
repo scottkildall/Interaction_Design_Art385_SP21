@@ -2,5 +2,5 @@ ID,StateName,ClassName,PNGFilename,CollisionFilename
 0,Splash,PNGRoom,assets/Splash.png,
 1,Instructions,PNGRoom,assets/Instructions.png,
 2,Characters,PNGRoom,assets/Characters.png,
-3,Start,ScenarioRoom,assets/Background.png,
+3,Start,PNGRoom,assets/Background.png,
 
