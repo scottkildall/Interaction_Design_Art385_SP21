@@ -3,4 +3,7 @@ ID,StateName,ClassName,PNGFilename,CollisionFilename
 1,Instructions,PNGRoom,assets/Instructions.png,
 2,Characters,PNGRoom,assets/Characters.png,
 3,Start,ScenarioRoom,assets/Background.png,
+4,GoomazonMoves,ScenarioRoom,assets/Background.png,
+5,CityPays,ScenarioRoom,assets/Background.png,
+6,RaisedTaxes,ScenarioRoom,assets/Background.png,
 

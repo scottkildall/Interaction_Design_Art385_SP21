@@ -29,6 +29,7 @@ const cl_Start_GoomazonPays = 1;
 const cl_Start_CityPays = 2;
 const cl_Start_RaiseTaxes = 3;
 
+
 // anger emojis
 var angerImage;   // anger emoji
 var maxAnger = 5;
@@ -47,10 +48,20 @@ const consumer = 5;
 
 // room indices - look at adventureManager
 const startScreen = 3;
+const goomazonMovesScreen = 4;
+const cityPaysScreen = 5;
+const raisedTaxesScreen = 6;
+
+let headlineFont;
+let bodyFont;
 
 
 // Allocate Adventure Manager with states table and interaction tables
 function preload() {
+
+  headlineFont = loadFont('fonts/FogCityGothic-Wide.otf');
+  bodyFont = loadFont('fonts/FogCityGothic-Regular.otf');
+
   // load all images
   angerImage = loadImage("assets/anger_emoji.png");
   
@@ -232,7 +243,7 @@ class Character {
 
       // draw anger emojis
       for( let i = 0; i < this.anger; i++ ) {
-        image(angerImage, this.x + 70 + (i*55), this.y +10 );
+        image(angerImage, this.x + 70 + (i*40), this.y +10 );
       }
 
       pop();
@@ -272,7 +283,10 @@ function loadAllText() {
 // copy the array reference from adventure manager so that code is cleajer
   scenarioRooms = adventureManager.states;
 
-  scenarioRooms[startScreen].setText("Who Pays for it?", "The underground tunnels cost money to maintain. Goomazon threatens to leave the city if they have to pay for all the maintenance work. What should we do?");
+  scenarioRooms[startScreen].setText("Who Pays for it?", "The underground tunnels cost money to maintain. Goomazon threatens to leave the city if they have to pay for all the maintenance work. Who pays for it?");
+  scenarioRooms[goomazonMovesScreen].setText("Do we lure them back?", "Goomazon moves their headquarters to our rival city across the river. They layoff local workers. How should we respond?");
+  scenarioRooms[cityPaysScreen].setText("What do we cut?", "The city budget is getting tanked because of the cost of the tunels. Which programs should we cut?");
+  scenarioRooms[raisedTaxesScreen].setText("How do we help the economy?", "The wealthy leave the city in droves. Restaurants start closing and our tax base is depleted. What do we do?");
 }
 
 //-------------- SUBCLASSES / YOUR DRAW CODE CAN GO HERE ---------------//
@@ -294,7 +308,7 @@ class ScenarioRoom extends PNGRoom {
     this.titleText = titleText;
     this.bodyText = bodyText;
     this.drawY = 360;
-    this.drawX = 100;
+    this.drawX = 52;
   }
 
   // call the PNGRoom superclass's draw function to draw the background image
@@ -303,29 +317,30 @@ class ScenarioRoom extends PNGRoom {
       // this calls PNGRoom.draw()
       super.draw();
       
+      push();
 
       // title text
       fill(255);
-      textAlign(CENTER);
+      textAlign(LEFT);
+      textFont(headlineFont);
       textSize(36);
 
-      text("How do we feel?", width/2, 60);
+      text("How do we feel?", this.drawX , 60);
 
       // title text
-      fill(255);
-      textAlign(CENTER);
       textSize(30);
 
-      text(this.titleText, width/2, this.drawY);
+      text(this.titleText, this.drawX , this.drawY);
      
       // Draw text in a box
       //text(this.titleText, width/6, height/6, this.textBoxWidth, this.textBoxHeight );
     
-      fill(255);
-      textAlign(LEFT);
+      textFont(bodyFont);
       textSize(24);
 
-      text(this.bodyText, this.drawX, this.drawY + 60, width - (this.drawX*2),height - (this.drawY+100) );
+      text(this.bodyText, this.drawX , this.drawY + 60, width - (this.drawX*2),height - (this.drawY+100) );
+      
+      pop();
     }
 }
 
