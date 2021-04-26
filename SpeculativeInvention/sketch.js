@@ -1,8 +1,10 @@
 /***********************************************************************************
-  MoodyMaze
+  SpecuativeInvention
   by Scott Kildall
 
   Uses the p5.2DAdventure.js class 
+  
+  This can serve as a template of sorts.
   
 ------------------------------------------------------------------------------------
 	To use:
