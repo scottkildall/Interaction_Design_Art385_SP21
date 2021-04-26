@@ -22,14 +22,33 @@ var playerAnimation;
 var clickablesManager;    // the manager class
 var clickables;           // an array of clickable objects
 
+// 
 // indexes into the clickable array (constants)
 const playGameIndex = 0;
 const chooseAvatarIndex = 1;
 const doneIndex = 2;
 
+// anger emojis
+var angerImage;   // anger emoji
+var maxAnger = 5;
+
+var characterImages = [];   // array of character images, keep global for future expansion
+var characters = [];        // array of charactes
+
+const goomazon = 0;
+const mayor = 1;
+const bigLabor = 2;
+const nimby = 3;
+const treeHugger = 4;
+const consumer = 5;
 
 // Allocate Adventure Manager with states table and interaction tables
 function preload() {
+  // load all images
+  angerImage = loadImage("assets/anger_emoji.png");
+  
+  allocateCharacters();
+
   clickablesManager = new ClickableManager('data/clickableLayout.csv');
   adventureManager = new AdventureManager('data/adventureStates.csv', 'data/interactionTable.csv', 'data/clickableLayout.csv');
 }
@@ -60,6 +79,18 @@ function draw() {
   // draws background rooms and handles movement from one to another
   adventureManager.draw();
 
+ // drawCharacters();
+
+  // don't draw them on first few screens
+  if( adventureManager.getStateName() === "Splash" ||
+      adventureManager.getStateName() === "Instructions" ||
+      adventureManager.getStateName() === "Characters" ) {
+    ;
+  }
+  else {
+    drawCharacters();
+  }
+  
   // draw the p5.clickables, in front of the mazes but behind the sprites 
   clickablesManager.draw();
 }
@@ -82,6 +113,11 @@ function mouseReleased() {
   adventureManager.mouseReleased();
 }
 
+function drawCharacters() {
+  for( let i = 0; i < characters.length; i++ ) {
+    characters[i].draw();
+  }
+}
 
 //-------------- CLICKABLE CODE  ---------------//
 
@@ -114,14 +150,86 @@ clickableButtonPressed = function() {
   
 }
 
+//-------------- CHARACTERS -------------//
+function allocateCharacters() {
+  // load the images first
+  characterImages[goomazon] = loadImage("assets/goomazon.jpg");
+  characterImages[mayor] = loadImage("assets/mayor.jpg");
+  characterImages[bigLabor] = loadImage("assets/bigLabor.jpg");
+  characterImages[nimby] = loadImage("assets/nimby.jpg");
+  characterImages[treeHugger] = loadImage("assets/treeHugger.jpg");
+  characterImages[consumer] = loadImage("assets/consumer.jpg");
 
+  for( let i = 0; i < characterImages.length; i++ ) {
+    characters[i] = new Character();
+    characters[i].setup( characterImages[i], 50 + (400 * parseInt(i/2)), 120 + (i%2 * 120));
+  }
+
+  // default anger is zero, set up some anger values
+  characters[bigLabor].addAnger(1);
+  characters[nimby].addAnger(2);
+  characters[treeHugger].addAnger(1);
+  characters[consumer].subAnger(2); // test
+}
+
+class Character {
+  constructor() {
+    this.image = null;
+    this.x = width/2;
+    this.y = width/2;
+  }
+
+  setup(img, x, y) {
+    this.image = img;
+    this.x = x;
+    this.y = y;
+    this.anger = 0;
+  }
+
+  draw() {
+    if( this.image ) {
+      push();
+      // draw the character icon
+      imageMode(CENTER);
+      image( this.image, this.x, this.y );
+
+      // draw anger emojis
+      for( let i = 0; i < this.anger; i++ ) {
+        image(angerImage, this.x + 70 + (i*55), this.y +10 );
+      }
+
+      pop();
+    }
+  }
+
+  getAnger() {
+    return this.anger;
+  }
+
+  // add, check for max overflow
+  addAnger(amt) {
+    this.anger += amt;
+    if( this.anger > maxAnger ) {
+      this.anger = maxAnger;
+    }
+
+  }
+
+  // sub, check for below zero
+  subAnger(amt) {
+    this.anger -= amt;
+    if( this.anger < 0 ) {
+      this.anger = 0;
+    }
+  }
+}
 
 //-------------- SUBCLASSES / YOUR DRAW CODE CAN GO HERE ---------------//
 
 // Instructions screen has a backgrounnd image, loaded from the adventureStates table
 // It is sublcassed from PNGRoom, which means all the loading, unloading and drawing of that
 // class can be used. We call super() to call the super class's function as needed
-class InstructionsScreen extends PNGRoom {
+class StandardScreen extends PNGRoom {
   // Constructor gets calle with the new keyword, when upon constructor for the adventure manager in preload()
   constructor() {
     super();    // call super-class constructor to initialize variables in PNGRoom
