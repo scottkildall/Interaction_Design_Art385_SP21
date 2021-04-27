@@ -23,7 +23,7 @@ var clickablesManager;    // the manager class
 var clickables;           // an array of clickable objects
 
 
-// indexes into the clickable array (constants)
+// indexes into the clickable array (constants) 
 const cl_startScenario = 0;
 const cl_Start_GoomazonPays = 1;
 const cl_Start_CityPays = 2;
@@ -162,18 +162,18 @@ function setupClickables() {
   }
 
   // we do specific callbacks for each clickable
-  clickables[cl_startScenario].onPress = clickableButtonPressed;
-  clickables[cl_Start_GoomazonPays].onPress = clGoomazonPays;
-  clickables[cl_Start_CityPays].onPress = clCityPays;
-  clickables[cl_Start_RaiseTaxes].onPress = clRaiseTaxes;
-  clickables[cl_GoomazonMoves_CityPays].onPress = clCityPays;
-  clickables[cl_GoomazonMoves_RaiseTaxes].onPress = clRaiseTaxes;
-  clickables[cl_GoomazonMoves_BuildRival].onPress = clBuildRival;
-  clickables[cl_GoomazonMoves_IgnoreThem].onPress = clIgnoreThem;
-  clickables[cl_CityPays_CutTheArts].onPress = clCutArts;
-  clickables[cl_CityPays_CutTransportation].onPress = clCutTransportation;
-  clickables[cl_CityPays_CutCityWages].onPress = clCutCityWages;
-  clickables[cl_CityPays_CutParks].onPress = clCutParks;
+  clickables[0].onPress = clickableButtonPressed;
+  clickables[1].onPress = clGoomazonPays;
+  clickables[2].onPress = clCityPays;
+  clickables[3].onPress = clRaiseTaxes;
+  clickables[4].onPress = clCityPays;
+  clickables[5].onPress = clRaiseTaxes;
+  clickables[6].onPress = clBuildRival;
+  clickables[7].onPress = clIgnoreThem;
+  clickables[8].onPress = clCutArts;
+  clickables[9].onPress = clCutTransportation;
+  clickables[10].onPress = clCutCityWages;
+  clickables[11].onPress = clCutParks;
 }
 
 // tint when mouse is over
