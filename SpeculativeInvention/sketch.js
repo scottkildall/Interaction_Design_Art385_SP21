@@ -1,10 +1,8 @@
 /***********************************************************************************
-  SpecuativeInvention
+  MoodyMaze
   by Scott Kildall
 
   Uses the p5.2DAdventure.js class 
-  
-  This can serve as a template of sorts.
   
 ------------------------------------------------------------------------------------
 	To use:
@@ -30,6 +28,15 @@ const cl_startScenario = 0;
 const cl_Start_GoomazonPays = 1;
 const cl_Start_CityPays = 2;
 const cl_Start_RaiseTaxes = 3;
+const cl_GoomazonMoves_CityPays = 4;
+const cl_GoomazonMoves_RaiseTaxes = 5;
+const cl_GoomazonMoves_BuildRival = 6;
+const cl_GoomazonMoves_IgnoreThem = 7;
+const cl_CityPays_CutTheArts = 8;
+const cl_CityPays_CutTransportation = 9;
+const cl_CityPays_CutCityWages = 10;
+const cl_CityPays_CutParks = 11;
+
 
 // anger emojis
 var angerImage;   // anger emoji
@@ -49,10 +56,24 @@ const consumer = 5;
 
 // room indices - look at adventureManager
 const startScreen = 3;
+const goomazonMovesScreen = 4;
+const cityPaysScreen = 5;
+const raisedTaxesScreen = 6;
+const rivalCompanyScreen = 7;
+const goomazonExpands = 8;
+const cityUgly = 9;
+const workersStrike = 10;
+
+let headlineFont;
+let bodyFont;
 
 
 // Allocate Adventure Manager with states table and interaction tables
 function preload() {
+
+  headlineFont = loadFont('fonts/FogCityGothic-Wide.otf');
+  bodyFont = loadFont('fonts/FogCityGothic-Regular.otf');
+
   // load all images
   angerImage = loadImage("assets/anger_emoji.png");
   
@@ -145,6 +166,14 @@ function setupClickables() {
   clickables[cl_Start_GoomazonPays].onPress = clGoomazonPays;
   clickables[cl_Start_CityPays].onPress = clCityPays;
   clickables[cl_Start_RaiseTaxes].onPress = clRaiseTaxes;
+  clickables[cl_GoomazonMoves_CityPays].onPress = clCityPays;
+  clickables[cl_GoomazonMoves_RaiseTaxes].onPress = clRaiseTaxes;
+  clickables[cl_GoomazonMoves_BuildRival].onPress = clBuildRival;
+  clickables[cl_GoomazonMoves_IgnoreThem].onPress = clIgnoreThem;
+  clickables[cl_CityPays_CutTheArts].onPress = clCutArts;
+  clickables[cl_CityPays_CutTransportation].onPress = clCutTransportation;
+  clickables[cl_CityPays_CutCityWages].onPress = clCutCityWages;
+  clickables[cl_CityPays_CutParks].onPress = clCutParks;
 }
 
 // tint when mouse is over
@@ -164,7 +193,9 @@ clickableButtonPressed = function() {
   adventureManager.clickablePressed(this.name);
 } 
 
-
+//-- specific button callbacks: these will add or subtrack anger, then
+//-- pass the clickable pressed to the adventure manager, which changes the
+//-- state. A more elegant solution would be to use a table for all of these values
 clGoomazonPays = function() {
     characters[goomazon].addAnger(2);
     characters[nimby].subAnger(1);
@@ -186,6 +217,51 @@ clRaiseTaxes = function() {
   characters[goomazon].subAnger(1);
   adventureManager.clickablePressed(this.name);
 }
+
+clBuildRival = function() {
+  characters[nimby].addAnger(2);
+  characters[consumer].subAnger(1);
+  characters[goomazon].addAnger(1);
+  characters[bigLabor].addAnger(1);
+  adventureManager.clickablePressed(this.name);
+}
+
+clIgnoreThem = function() {
+  characters[nimby].addAnger(1);
+  characters[treeHugger].addAnger(1);
+  characters[bigLabor].addAnger(1);
+  adventureManager.clickablePressed(this.name);
+}
+
+clCutArts = function() {
+  characters[treeHugger].addAnger(2);
+  characters[consumer].addAnger(2);
+  characters[mayor].addAnger(1);
+  adventureManager.clickablePressed(this.name);
+}
+
+clCutTransportation = function() {
+  characters[treeHugger].addAnger(3);
+  characters[mayor].addAnger(1);
+  characters[consumer].addAnger(1);
+  adventureManager.clickablePressed(this.name);
+}
+
+clCutCityWages = function() {
+  characters[mayor].addAnger(2);
+  characters[bigLabor].addAnger(2);
+  characters[consumer].addAnger(1);
+  adventureManager.clickablePressed(this.name);
+}
+
+clCutParks = function() {
+  characters[mayor].addAnger(1);
+  characters[treeHugger].addAnger(2);
+  characters[consumer].addAnger(1);
+  adventureManager.clickablePressed(this.name);
+}
+
+
 
 
 
@@ -234,7 +310,7 @@ class Character {
 
       // draw anger emojis
       for( let i = 0; i < this.anger; i++ ) {
-        image(angerImage, this.x + 70 + (i*55), this.y +10 );
+        image(angerImage, this.x + 70 + (i*40), this.y +10 );
       }
 
       pop();
@@ -274,7 +350,14 @@ function loadAllText() {
 // copy the array reference from adventure manager so that code is cleajer
   scenarioRooms = adventureManager.states;
 
-  scenarioRooms[startScreen].setText("Who Pays for it?", "The underground tunnels cost money to maintain. Goomazon threatens to leave the city if they have to pay for all the maintenance work. What should we do?");
+  scenarioRooms[startScreen].setText("Who Pays for it?", "The underground tunnels cost money to maintain. Goomazon threatens to leave the city if they have to pay for all the maintenance work. Who pays for it?");
+  scenarioRooms[goomazonMovesScreen].setText("Do we lure them back?", "Goomazon moves their headquarters to our rival city across the river. They layoff local workers. How should we respond?");
+  scenarioRooms[cityPaysScreen].setText("What do we cut?", "The city budget is getting tanked because of the cost of the tunels. Which programs should we cut?");
+  scenarioRooms[raisedTaxesScreen].setText("How do we help the economy?", "The wealthy leave the city in droves. Restaurants start closing and our tax base is depleted. What do we do?");
+  scenarioRooms[rivalCompanyScreen].setText("It's bad, what do we do?", "The rival company is even worse than Goomazon. In addition to being anti-union, they force everyone to wear silly uniforms, sing happy children's songs and sign the most restrictive NDAs ever.");
+  scenarioRooms[goomazonExpands].setText("Oh-no! Now what to do?", "Goomazon expands its operations. It is now both in your city and the rival city. It's driven out all the local businesses.");
+  scenarioRooms[cityUgly].setText("How can we fix this?", "The city has cut the budget to some of its essential services. It's been a cascading effect. Without arts and adequate transportation, everyone has become depressed. THE END.");
+  scenarioRooms[workersStrike].setText("How do we respond?", "There are massive worker's strikes. The city is shut down. Big labor is angry and riling people up. Thousands of protesters are in the streets.");
 }
 
 //-------------- SUBCLASSES / YOUR DRAW CODE CAN GO HERE ---------------//
@@ -296,7 +379,7 @@ class ScenarioRoom extends PNGRoom {
     this.titleText = titleText;
     this.bodyText = bodyText;
     this.drawY = 360;
-    this.drawX = 100;
+    this.drawX = 52;
   }
 
   // call the PNGRoom superclass's draw function to draw the background image
@@ -305,29 +388,30 @@ class ScenarioRoom extends PNGRoom {
       // this calls PNGRoom.draw()
       super.draw();
       
+      push();
 
       // title text
       fill(255);
-      textAlign(CENTER);
+      textAlign(LEFT);
+      textFont(headlineFont);
       textSize(36);
 
-      text("How do we feel?", width/2, 60);
+      text("How do we feel?", this.drawX , 60);
 
       // title text
-      fill(255);
-      textAlign(CENTER);
       textSize(30);
 
-      text(this.titleText, width/2, this.drawY);
+      text(this.titleText, this.drawX , this.drawY);
      
       // Draw text in a box
       //text(this.titleText, width/6, height/6, this.textBoxWidth, this.textBoxHeight );
     
-      fill(255);
-      textAlign(LEFT);
+      textFont(bodyFont);
       textSize(24);
 
-      text(this.bodyText, this.drawX, this.drawY + 60, width - (this.drawX*2),height - (this.drawY+100) );
+      text(this.bodyText, this.drawX , this.drawY + 60, width - (this.drawX*2),height - (this.drawY+100) );
+      
+      pop();
     }
 }
 

@@ -3,3 +3,11 @@ ID,Name,State,PNGFilename,Text,x,y,visible
 1,Start_GoomazonPays,Start,,Goomazon,100,600,yes
 2,Start_CityPays,Start,,City Government,400,600,yes
 3,Start_RaiseTaxes,Start,,Raise Taxes,700,600,yes
+4,GoomazonMoves_CityPays,GoomazonMoves,,Yes: City Pays,100,600,yes
+5,GoomazonMoves_RaiseTaxes,GoomazonMoves,,Yes: Raise Taxes,300,600,yes
+6,GoomazonMoves_BuildRival,GoomazonMoves,,Build a Rival,500,600,yes
+7,GoomazonMoves_IgnoreThem,GoomazonMoves,,Ignore Them,700,600,yes
+8,CityPays_CutTheArts,CityPays,,The Arts,100,600,yes
+9,CityPays_CutTransportation,CityPays,,Transportation,300,600,yes
+10,CityPays_CutCityWages,CityPays,,City Wages,500,600,yes
+11,CityPays_CutParks,CityPays,,Parks,700,600,yes
